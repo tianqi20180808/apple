@@ -1,0 +1,1 @@
+$(".select1").addClass("select1").siblings().removeClass('select1');

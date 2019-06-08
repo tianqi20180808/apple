@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>iphone-苹果官网</title>
+		<link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.css"/>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="font_1127552_1twphlq5nsq/iconfont.css"/>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/car.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+	</head>
+	<body>
+		<div id="shadow"></div>  <!-- 遮罩区-->
+		<div style="background:#444 ;">
+			<div class="container" >
+				<div class="gao"  style="background-color:#444;color: white;">
+					<a href="#">&lt;广告 &gt;</a>
+				</div>
+			</div>
+		</div>
+		<div style="background: #313131;">
+			<div class="container" >
+				<div class="nav">
+					<ul>
+						<li><a href="index.html"><span class="iconfont">&#xe9d9;</span></a></li>
+						<li class="hiden"><a href="#">Mac</a></li>
+						<li class="hiden"><a href="#">ipad</a></li>
+						<li class="hiden"><a href="#">iphone</a></li>
+						<li class="hiden"><a href="#">Watch</a></li>
+						<li class="hiden"><a href="#">Music</a></li>
+						<li class="hiden"><a href="#">技术支持</a></li>
+						<li><a id="search" href="#"><span class="iconfont">&#xe646;</span></a></li>
+						<li id="shop" ><a href="#"><span class="iconfont">&#xe60e;</span></a></li>
+					</ul>
+					<!-- 购物袋 -->
+					<div id="show">
+						<p id="numbers" class="text-center">总价格：<span id="totalPrice">0.00</span><span>&yen;</span></p>
+						<p id="goods" class="text-blue" ><span class="iconfont">&#xe9d8;</span> <a href="html/mycar.html">购物袋 </a> (<span id="totalNumber">34</span>)</p>
+						<p id="coll" class="text-blue" ><span class="iconfont">&#xe612;</span> <a href="html/store.html">收藏 </a></p>
+						<p id="username" class="text-blue" ><span class="iconfont">&#xe676;</span> <a href="html/zhuce.html">账户</a></p>
+						<p id= "login" class="text-blue" style="border: none;"><span class="iconfont">&#xe64b;</span> <a href="html/denglu.html">登陆 </a></p>
+					</div>
+					<!-- 搜索框 -->
+					<div class="search"  id="searchfont">
+						<span class="iconfont" style="color: white;font-size: 16px;">&#xe646;</span>
+						<input type="text" name="text" value="" placeholder="搜索 apple.com"  autocomplete="off"/>
+						<ul id="show-ul">
+							<a href="#"><li>快速连接</li></a>
+							<a href="#"><li>查找零售店</li></a>
+							<a href="#"><li>today at Apple </li></a>
+							<a href="#"><li>配件</li></a>
+							<a href="#"><li>AirPods </li></a>
+							<a href="#"><li>ipod </li></a>
+						</ul>
+					</div>
+					<script type="text/javascript">
+						//点击搜索展示输入框
+						var falg=1;
+						$("#search").click(function(e){
+							$("#searchfont").fadeTo(500,1).css("display","block");
+							e=e||event;event.stopPropagation();//阻止冒泡
+							falg++;
+							//每次点击时清除上次输入的文字
+							$("input").val("");
+							//每次点击时清除上次保存的  ??????
+							
+							if(falg == 2){//再次点击,隐藏文本框
+								$("#searchfont").css("display","none");
+								falg=0;
+							}
+						});
+						//点击购物车,实现显示
+						var falg=0;
+						$("#shop").click(function(e){
+							$("#show").fadeTo(500,1).css("display","block");
+							e=e||event;event.stopPropagation();
+							falg++;
+							if(falg == 2){
+								$("#show").css("display","none");
+								falg=0;
+							}
+						});
+						
+						$("input").eq(0).click(function(e){
+							e=e||event;event.stopPropagation();
+							
+						})
+						//点击桌面空白区，关闭搜索框，关闭购物
+						$(document).click(function(e){
+							$("#show").css("display","none");
+							$("#searchfont").css("display","none");
+							$("#show-ul").show();
+							falg=0;
+							//点击搜索,除搜索框以外的区域出现遮罩层
+							// $(function(e){
+							// 	$("#search").click(function(){
+							// 		$("#shadow").show();
+							// 	});
+							// 	e=e||event;event.stopPropagation();
+							// });
+							// $("#shadow").on('click',function(e){
+							// 	if($(e.target).closest('#searchfont').length >0){
+							// 		alert(1);
+							// 	}else{
+							// 		$("#shadow").hide();
+							// 	}
+							// })
+						})
+						//键盘在搜索框按下获取内容，
+						$("input").keyup(function(){
+							var inputVal=$("input").val()
+							console.log(inputVal);
+							var script=document.createElement("script");
+							//在文本框里输入文字进行查询的时候，隐藏推荐的搜索内容
+							//$("#show-ul").hide();
+							$("body").append(script); 
+							script.src=`https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=wise_web&wd=${inputVal}&req=2&bs=html&pbs=html&csor=3&pwd=js&cb=test&_=1557973280025`;
+						});
+						function test(data){
+							console.log(data);
+							var result=data.g;
+							var str=``;
+							for(var i=0;i<result.length;i++){
+								str += `<a href= 'https://www.baidu.com/s?wd=${result[i].q}'><li><span class="iconfont">&#xe646;</span>${result[i].q}</li></a>`;
+							}
+							$("#show-ul").html(str);
+						}
+						//加入购物车
+						var car = new Car();
+						function addCar(btnEle) {
+							var ul = btnEle.parentElement;
+							var lis = ul.children;
+							// console.log(lis);
+							var shouji = {
+								img: lis[0].innerHTML,
+								marner: lis[1].innerHTML,
+								id: lis[2].innerHTML,
+								price: lis[3].innerHTML,
+								number: 1,
+
+							};
+							// console.log(shouji);
+							car.addToCar(shouji)
+						}
+						document.getElementById('totalPrice').innerText = car.getTotalPrice();
+						document.getElementById('totalNumber').innerText = car.getTotalNumber();
+					</script>
+				</div>
+			</div>
+		</div>
+		<!-- nav   end -->
+		<div class="container">
+			
+		</div>
+		<!--product end  -->
+		<div class="betwen">
+			<div class="container">
+				<h2 class="text-center text-top">折抵换新iphone Xr 仅RMB176/月起，或RMB 4229 起。</h2>
+				<h4 class="text-center  text-top2">两种方式，让你轻松抵折换购iphone:直接在线操作，或<br/>者在Apple Store 零售店办理</h4>
+				<p class="text-center text-font"><a href="./html/shopping.html">购买 &gt;</a> <span class="null"></span> <a href="#">进一步了解 &gt;</a></p>
+			</div>
+		</div>
+		<!--product iphone end  -->
+		<div class="betwen">
+			<div class="container lianjie">
+				<a href="#">
+					<h2 class="text-center text-top">iphoneXR</h2>
+					<h4 class="text-center  text-top2">两种方式，让你轻松抵折换购iphone:直接在线操作，或<br/>者在Apple Store 零售店办理</h4>
+					<p class="text-center text-font"><a href="#">进一步了解 &gt;</a><span class="null"></span> <a href="./html/shopping.html">购买 &gt;</a></p>
+					 <a href="#"> <img  class="text-center" src="images/page1.png" ></a>
+				</a>
+			</div>
+		</div>
+		<!--product iphoneXR END  -->
+		<div class="betwen">
+			<div class="container lianjie">
+				<a href="#">
+					<h2 class="text-center text-top">iphoneXS</h2>
+					<h4 class="text-center  text-top2">两种方式，让你轻松抵折换购iphone:直接在线操作，或<br/>者在Apple Store 零售店办理</h4>
+					<p class="text-center text-font"><a href="#">进一步了解 &gt;</a><span class="null"></span>  <a href="./html/shopping-xs.html">购买 &gt;</a></p>
+					<a href="#"> <img  class="text-center" src="images/page02.png" ></a>
+				</a>
+			</div>
+		</div>
+			<!-- product iphoneXS END -->
+		<div class="betwen">
+			<div class="container lianjie">
+				<a href="#">
+					<h1 class="text-center text-top"> <span class="iconfont" style="font-size: 40px;">&#xe9da;</span>Watch</h1>
+					<h4 class="text-center" style="color: red;line-height: 34px;">SEARIES</h4>
+					 <h5 class="text-center" style="line-height: 40px;">更强，更出彩。</h5>
+					<p class="text-center text-font"><a href="#">进一步了解 &gt;</a><span class="null"></span>  <a href="./html/shopping-watch.html">购买 &gt;</a></p>
+					<a href="#"> <img  class="text-center" src="images/page03.png" ></a>
+				</a>
+			</div>
+		</div>
+			<!-- product watch -->
+		<div class="betwen">
+			<div class="container" style="background: #0000FF;">
+				<div class="row">
+					<div class="col-md-6 apple1">
+						<h1 class="text-center text-top"> <span class="iconfont" style="font-size: 40px;">&#xe9da;</span>WWDC19</h1>
+						<h5 class="text-center" style="line-height: 25px; font-size: 12px;">北京时间6月4日凌晨1点<br>欢迎来我们美国官网观看主题演讲。</h5>
+						<p class="text-center"><a style="color: white;" href="#">进一步了解 &gt;</a></p>
+					</div>
+					<div class="col-md-6  apple2">
+						<h1 class="text-center text-top"> <span class="iconfont" style="font-size: 40px;">&#xe9da;</span>Music</h1>
+						<h5 class="text-center" style="line-height: 40px; font-size: 12px;">上千万首歌曲，敬请沉醉。</h5>
+						<p class="text-center"><a style="color: white;" href="#">进一步了解 &gt;</a></p>
+					</div>
+				</div>
+				<!-- 白底图片，ipad Pro&MacBook Air -->
+				<div class="row">
+					<div class="col-md-6 apple3">
+						<h1 class="text-center text-top">ipad Pro</h1>
+						<h5 class="text-center" style="line-height: 40px; font-size: 12px;color: black;">全新，全面屏，全方位强大。</h5>
+						<p class="text-center"><a href="#">进一步了解 &gt;</a> <span class="null"></span> <a href="./html/shopping.html">购买 &gt;</a></p>
+					</div>
+					<div class="col-md-6  apple4">
+						<h1 class="text-center text-top"> MacBook Air</h1>
+						<h5 class="text-center" style="line-height: 40px; font-size: 12px; color: black">轻轻地，再次倾心。</h5>
+						<p class="text-center"><a href="#">进一步了解 &gt;</a><span class="null"></span> <a href="./html/shopping.html">购买 &gt;</a></p>
+					</div>
+				</div>
+				<!--  -->
+				<div class="row">
+					<div class="col-md-6 apple5">
+						<h1 class="text-center text-top">AirPods</h1>
+						<h5 class="text-center" style="line-height: 20px; font-size: 12px;color: black;">可无线充电，可语音激活Siri,</br>妙出新境界。</h5>
+						<p class="text-center"><a href="#">进一步了解 &gt;</a> <span class="null"></span> <a href="./html/shopping.html">购买 &gt;</a></p>
+					</div>
+					<div class="col-md-6  apple6">
+						<h1 class="text-center text-top text-position" style="color: white; line-height: 52px;">这很   iphone</h1>
+						<p class="text-center text-position"><a href="#">来看看iphone的种种本领 &gt;</a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+			<!-- 底部文字 -->
+			<div class="betwen">
+				<div class="container">
+					<p class="text-font3">* 所示的 iPhone XR 64GB 机型价格是使用 iPhone 7 Plus 32GB 机型进行折抵换购的价格。上述所示机型的分期付款金额是在使用 iPhone 7 Plus 32GB 机型进行折抵后，再以招商银行、中国工商银行或花呗 24 期免息分期付款方式估算得出的整数金额 (未显示小数点以后的金额)，实际支付金额以银行或花呗账单为准。本优惠活动暂定截止日期为 2019 年 6 月 30 日，可能视情况延长。折抵金额仅可在限定时间内使用，并且要求用于购买新 iPhone，以限制条款为准。实际折抵金额取决于设备的状况、配置、制造年份，以及发售国家或地区。银行或花呗可能要求你的可用信用额度大于所购买产品的总金额，才能使用分期付款服务。有关信用卡或花呗分期服务的申请及使用问题，请与银行或花呗联系，Apple 对此不做任何承诺和保证。Apple 的折抵换购活动为 Apple 与 Apple 折抵服务合作伙伴共同推出，年满 18 周岁及以上者才能享受此项折抵换购服务。店内折抵换购需出示政府颁发并附有照片的有效身份证件 (当地法律可能会要求存储该信息)。可能需要遵守 Apple 或 Apple 折抵服务合作伙伴的其他条款。本优惠不能与 Apple 的其他优惠或折扣活动同时使用。如需了解更多免息分期付款信息，请点击此处。</p>
+					<p class="text-font3">** 仅限新订阅用户。当试用期结束后，会员方案将按月自动续订。</p>
+				</div>
+			</div>
+			<!-- footer  -->
+			<div class="betwen">
+				<div class="container foot">
+					<!-- 1/5 -->
+					<ul>
+						<li style="font-weight: 600;">选购及了解</li>
+						<li>Mac</li>
+						<li>ipad</li>
+						<li>iphone</li>
+						<li>Watch</li>
+						<li>Music</li>
+						<li>itunes</li>
+						<li>HomePod</li>
+						<li>ipod touch</li>
+						<li>配件</li>
+						<li>App Store充值卡</li>
+					</ul>
+					<!-- 2/5 -->
+					<ul>
+						<li style="font-weight: 600;">Apple Store 商店</li>
+						<li>查找零售店</li>
+						<li>Genius Bar 天才吧</li>
+						<li>Today at Apple</li>
+						<li>Apple 夏令营</li>
+						<li>Field Trip 课外活动</li>
+						<li>翻新和优惠</li>
+						<li>分期付款</li>
+						<li>Apple Trade In 换购计划</li>
+						<li>订单状态</li>
+					</ul>
+					<!-- 3/5 -->
+					<ul>
+						<li style="font-weight: 600;">Apple 教育</li>
+						<li>Apple 与教育</li>
+						<li>高校师生选购</li>
+						<li>商务应用</li>
+						<li>Apple 与商务</li>
+						<li>商务选购</li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+					</ul>
+					<!-- 4/5 -->
+					<ul>
+						<li style="font-weight: 600;">账户</li>
+						<li>管理你的 Apple ID</li>
+						<li>Apple Store 账户</li>
+						<li>iCloud.com</li>
+						<li></li>
+						<li>Apple 价值观</li>
+						<li>辅助功能</li>
+						<li>环境责任</li>
+						<li>隐私</li>
+						<li>供应商责任</li>
+					</ul>
+					<!-- 5/5 -->
+					<ul>
+						<li style="font-weight: 600;">关于 Apple</li>
+						<li>Newsroom</li>
+						<li>Apple 管理层</li>
+						<li>工作机会</li>
+						<li>工作机会</li>
+						<li>创造就业</li>
+						<li>活动</li>
+						<li>联系 Apple</li>
+						<li></li>
+						<li></li>
+					</ul>
+				</div>
+			</div>
+			<!-- copy -->
+			<div class="betwen">
+				<div class="container copy">
+					<p class="text-border">更多选购方式：<a href="#">前往 Apple Store 零售店，</a>，致电 400-666-8800 或查找在你附近的授权经销商。</p>
+					<p>Copyright © 2019 Apple Inc. 保留所有权利。隐私政策 使用条款 销售政策 法律信息 网站地图</p>
+					<p>京公安网安备11010502008968 京ICP备10214630 营业执照 无线电发射设备销售备案编号11201910351200</p>
+				</div>
+			</div>
+			
+	</body>
+</html>

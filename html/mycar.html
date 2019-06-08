@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>我的购物车</title>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/laydate/laydate.js"></script>
+    <script src="../js/jquery.validate.js"></script>
+    <link href="../css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="../font_1127552_1twphlq5nsq/iconfont.css" />
+    <script src="../js/public.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="../css/public.css" />
+    <script src="../js/car.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .mine{
+            width: 980px;
+           
+            margin: 0 auto
+        }
+        #box{
+            padding-top: 50px
+        }
+        .img{
+            width: 203px;
+            height: 328px;float: left;
+        }
+        .img img{
+            width: 203px;
+            height: 203px;
+        }
+        .box-right{
+            width: 735px;height: 328px;float: right;
+        }
+        .box-right-top{
+            width: 735px;height: 65px;border-bottom: 1px solid #333;
+        }
+        .box-right-top{
+            font-size: 24px;
+        }
+        #btn{
+            background-color: brown;color: #ccc;border: 1px solid #111;border-radius: 3px;margin-left: 700px
+        }
+        .box-right-mid{
+            width: 735px;height:46.8px ;line-height: 46.8px;border-bottom: 1px solid #333;
+        }
+        .box-right-mid a{
+            text-decoration: none;color: #111;
+        }
+        .box-right-mid a:hover{
+            color: deepskyblue;
+        }
+        .box-right-con{
+            width: 735px;height:46.8px ;line-height: 46.8px;border-bottom: 1px solid #333;
+        }
+        .box-right-con a{
+            text-decoration: none;color: #111;
+        }
+        .box-right-con a:hover{
+            color: deepskyblue;
+        }
+        .box-right-bot{
+            width: 735px;height:106.8px ;
+        }
+        .box-right-bot a{
+            text-decoration: none;color: #111;display: inline-block;margin-left: 25px;
+        }
+        .box-right-bot a:hover{
+            color:deepskyblue;
+        }
+        .mon{
+            width: 980px;height: 156.6px;
+        }
+        .mon-left{
+            width: 245px;height: 156.6px;float: left;
+        }
+        .mon-right{
+            width: 735px;height: 156.6px;float: left;
+        }
+        .mon-right-top{
+            width: 735px;height: 30.8px;margin-bottom: 30px;margin-top: 30px
+        }
+        
+        .mon-right-bot{
+            width: 735px;height: 30.8px;margin-bottom: 20px; border-bottom: 1px solid #333;
+        }
+        .mon-right-bot a{
+            text-decoration: none;color: #111;
+        }
+        .mon-right-bot a:hover{
+            color: cornflowerblue;
+        }
+        .jiezhang{
+            width: 980px;height: 52px;
+        }
+        .jiezhang-left{
+            width: 245px;height: px;float: left;
+        }
+        .jiezhang-right{
+            width: 735px;height: 52px;float: right;
+        }
+        .jiezhang-right-left{
+            width: 330px;height: 28px;float: left;
+        }
+        .jiezhang-right-right{
+            width: 405px;height: 28px;float: right;
+        }
+        .jiezhang-right-right span{
+            padding-left: 300px
+        }
+        .tit{
+            width: 735px;height: 20px;
+        }
+        .tit p{
+            padding-left: 400px;
+        }
+        .tit a{
+            text-decoration: none;color: cornflowerblue;
+        }
+        .foot-left{
+            width: 360px;height: 53.8px;float: left;
+        }
+        .foot-right{
+            width: 360px;height: 53.8px;float: right;margin-top: 30px
+        }
+        #box ul {
+            border-bottom: 1px solid #ccc;
+        }
+        #totalPrice1{
+        	font-size: 20px;color: brown;
+        }
+    </style>
+</head>
+
+<body>
+	<div id="shadow"></div> <!-- 遮罩区-->
+	<div style="background:#444 ;">
+		<div class="btwen">
+			<div class="gao" style="background-color:#444;color: white;height: 40px;">
+				<a href="#">&lt;广告 &gt;</a>
+			</div>
+		</div>
+	</div>
+	<div style="background: #313131;">
+		<div class="btwen">
+			<div class="nav">
+				<ul>
+					<li><a href="../index.html"><span class="iconfont">&#xe9d9;</span></a></li>
+					<li class="hiden"><a href="#">Mac</a></li>
+					<li class="hiden"><a href="#">ipad</a></li>
+					<li class="hiden"><a href="#">iphone</a></li>
+					<li class="hiden"><a href="#">Watch</a></li>
+					<li class="hiden"><a href="#">Music</a></li>
+					<li class="hiden"><a href="#">技术支持</a></li>
+					<li><a id="search" href="#"><span class="iconfont">&#xe646;</span></a></li>
+					<li id="shop"><a href="#"><span class="iconfont">&#xe60e;</span></a></li>
+				</ul>
+				<!-- 购物袋 -->
+				<div id="show">
+					<p id="numbers" class="text-center">总价格：<span id="totalPrice">0.00</span><span>&yen;</span></p>
+					<p id="goods" class="text-blue"><span class="iconfont">&#xe9d8;</span> <a href="mycar.html">购物袋 </a>(<span id="totalNumber">34</span>)</p>
+					<p id="coll" class="text-blue"><span class="iconfont">&#xe612;</span> <a href="store.html">收藏 </a></p>
+					<p id="username" class="text-blue"><span class="iconfont">&#xe676;</span> <a href="zhuce.html">账户</a></p>
+					<p id="login" class="text-blue" style="border: none;"><span class="iconfont">&#xe64b;</span> <a href="denglu.html">登陆</a></p>
+				</div>
+				<!-- 搜索框 -->
+				<div class="search" id="searchfont">
+					<span class="iconfont" style="color: white;font-size: 16px;">&#xe646;</span>
+					<input type="text" name="text" value="" placeholder="搜索 apple.com" autocomplete="off" />
+					<ul id="show-ul">
+						<a href="#">
+							<li>快速连接</li>
+						</a>
+						<a href="#">
+							<li>查找零售店</li>
+						</a>
+						<a href="#">
+							<li>today at Apple </li>
+						</a>
+						<a href="#">
+							<li>配件</li>
+						</a>
+						<a href="#">
+							<li>AirPods </li>
+						</a>
+						<a href="#">
+							<li>ipod </li>
+						</a>
+					</ul>
+				</div>
+				<script type="text/javascript">
+					//点击搜索展示输入框
+					var falg = 1;
+					$("#search").click(function(e) {
+						$("#searchfont").fadeTo(500, 1).css("display", "block");
+						e = e || event;
+						event.stopPropagation(); //阻止冒泡
+						falg++;
+						//每次点击时清除上次输入的文字
+						$("input").val("");
+						//每次点击时清除上次保存的  ??????
+	
+						if (falg == 2) { //再次点击,隐藏文本框
+							$("#searchfont").css("display", "none");
+							falg = 0;
+						}
+					});
+					//点击购物车,实现显示
+					var falg = 0;
+					$("#shop").click(function(e) {
+						$("#show").fadeTo(500, 1).css("display", "block");
+						e = e || event;
+						event.stopPropagation();
+						falg++;
+						if (falg == 2) {
+							$("#show").css("display", "none");
+							falg = 0;
+						}
+					});
+	
+					$("input").eq(0).click(function(e) {
+						e = e || event;
+						event.stopPropagation();
+	
+					})
+					//点击桌面空白区，关闭搜索框，关闭购物
+					$(document).click(function(e) {
+						$("#show").css("display", "none");
+						$("#searchfont").css("display", "none");
+						$("#show-ul").show();
+						falg = 0;
+						//点击搜索,除搜索框以外的区域出现遮罩层
+						// $(function(e){
+						// 	$("#search").click(function(){
+						// 		$("#shadow").show();
+						// 	});
+						// 	e=e||event;event.stopPropagation();
+						// });
+						// $("#shadow").on('click',function(e){
+						// 	if($(e.target).closest('#searchfont').length >0){
+						// 		alert(1);
+						// 	}else{
+						// 		$("#shadow").hide();
+						// 	}
+						// })
+					})
+					//键盘在搜索框按下获取内容，
+					$("input").keyup(function() {
+						var inputVal = $("input").val()
+						console.log(inputVal);
+						var script = document.createElement("script");
+						//在文本框里输入文字进行查询的时候，隐藏推荐的搜索内容
+						//$("#show-ul").hide();
+						$("body").append(script);
+						script.src =
+							`https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=wise_web&wd=${inputVal}&req=2&bs=html&pbs=html&csor=3&pwd=js&cb=test&_=1557973280025`;
+					});
+	
+					function test(data) {
+						console.log(data);
+						var result = data.g;
+						var str = ``;
+						for (var i = 0; i < result.length; i++) {
+							str +=
+								`<a href= 'https://www.baidu.com/s?wd=${result[i].q}'><li><span class="iconfont">&#xe646;</span>${result[i].q}</li></a>`;
+						}
+						$("#show-ul").html(str);
+                    }
+				</script>
+			</div>
+		</div>
+	</div>
+	<!-- nav   end -->
+    <div>
+          
+     <div class="mine">
+        <div class="head">
+        <h1 style="color:#111; font-size:40px; margin-top:64px">这是你购物袋中的商品。</h1>
+        <p style="color: grey; font-size:17px; margin-top:13.6px">免费送货,还可免费退货。</p>
+    </div>
+    </div>
+    <div class="mine">
+       <div id="box">
+           <!-- <div class="img">
+               <a href="#"><img src="./img/pic02.png"></a> 
+           </div>
+           <div class="box-right">
+               <div class="box-right-top">
+                  <span style="margin-right:250px ">iphone1</span><span>1</span><span style="margin-left: 250px">RMB1558</span>
+                  <button id="btn">移除</button>
+               </div>
+               <div class="box-right-mid">
+                   <span style="margin-right: 630px">激光镌刻</span><span><a href="#">添加</a></span>
+               </div>
+               <div class="box-right-con">
+                <span style="margin-right: 600px">添加礼品赠言</span><span><a href="#">添加</a></span>
+               </div>
+               <div class="box-right-bot">
+                   <p style="margin-top: 100px;margin-bottom:15px">了解你何时能收到商品<a href="#">选择送货日期</a></p>
+                   <p>3-5个工作日发货</p>
+               </div>
+           </div> --> 
+           <div class="box-right-bot">
+                   <p style="margin-top: 100px;margin-bottom:15px">了解你何时能收到商品<a href="#">选择送货日期</a></p>
+                   <p>3-5个工作日发货</p>
+               </div>
+       </div>
+       <div class="mon">
+           <div class="mon-left"></div>
+           <div class="mon-right">
+               <div class="mon-right-top">
+                   <span style="margin-right: 670px">运费</span><span>免费</span>
+               </div>
+               <div class="mon-right-bot">
+                   <p>有优惠码吗？<a href="">立即输入</a></p>
+               </div>
+           </div>
+       </div>
+       <div class="jiezhang">
+           <div class="jiezhang-left"></div>
+           <div class="jiezhang-right">
+               <div class="jiezhang-right-left">
+                <span>总价格：</span>
+               </div>
+               <div class="jiezhang-right-right">
+               <span id="totalPrice1">0.00</span>&yen;
+               </div>
+           </div>
+       </div>
+       <div class="tit">
+           <p><a href="#">比较分期付款的方案，24个月方案</a></p>
+       </div>
+       <div class="foot">
+           <div class="foot-left"></div>
+           <div class="foot-right">
+            <button style="width: 350px; height: 50px; background-color: mediumslateblue;outline:none; border-radius:15px;cursor: pointer;">结账</button>;
+           </div>
+       </div>
+    </div>  
+    <script>
+            var car = new Car();
+            var cartlist = car.getCar();
+            var str = ``;
+            for (var i = 0; i < cartlist.length; i++) {
+                str += `
+                <div class="img">
+               <a href="#">${cartlist[i].img}</a> 
+           </div>
+           <div class="box-right">
+               <div class="box-right-top">
+                  <span style="margin-right:200px ">${cartlist[i].id}</span><span>数量：${cartlist[i].number}</span><span style="margin-left: 250px">${cartlist[i].price}</span>
+                  <button id="btn" onclick="del('${cartlist[i].id}')">移除</button>
+               </div>
+               <div class="box-right-mid">
+                   <span style="margin-right: 630px">激光镌刻</span><span><a href="#">添加</a></span>
+               </div>
+               <div class="box-right-con">
+                <span style="margin-right: 600px">添加礼品赠言</span><span><a href="#">添加</a></span>
+               </div>
+              
+           </div>
+      `
+                document.getElementById('box').innerHTML = str;
+            };
+			//加入购物车
+			var car = new Car();
+			function addCar(btnEle) {
+				var ul = btnEle.parentElement.parentElement;
+				var lis = ul.children;
+			// console.log(lis);
+			var shouji ={
+				img:lis[0].innerHTML,
+				marner:lis[1].innerHTML,
+				id:lis[2].innerHTML,
+				price:lis[3].innerHTML,
+				number:1,
+			
+			};
+			// console.log(shouji);
+			car.addToCar(shouji)
+			}
+			document.getElementById('totalPrice').innerText = car.getTotalPrice();
+			document.getElementById('totalNumber').innerText = car.getTotalNumber();
+            document.getElementById('totalPrice1').innerText = car.getTotalPrice();
+            function del(id) {
+                if(confirm('确认删除？')){
+                    if(car.delGoods(id)){
+                        location.reload();
+                    }else{
+                        alert('删除失败');
+                    }
+                }
+             }
+        </script>
+</body>
+
+
+</html>

@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>购物</title>
+		<link rel="stylesheet" type="text/css" href="../bootstrap-3.3.7-dist/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="../css/index.css" />
+		<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../font_1127552_1twphlq5nsq/iconfont.css" />
+		<script src="../js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/public.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/animate6.1.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/car.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../css/public.css" />
+		<link rel="stylesheet" type="text/css" href="../css/shopping.css" />
+	</head>
+	<body>
+		<div id="shadow"></div> <!-- 遮罩区-->
+		<div style="background:#444 ;">
+			<div class="container">
+				<div class="gao" style="background-color:#444;color: white;height: 40px;">
+					<a href="#">&lt;广告 &gt;</a>
+				</div>
+			</div>
+		</div>
+		<div style="background: #313131;">
+			<div class="container">
+				<div class="nav">
+					<ul>
+						<li><a href="../index.html"><span class="iconfont">&#xe9d9;</span></a></li>
+						<li class="hiden"><a href="#">Mac</a></li>
+						<li class="hiden"><a href="#">ipad</a></li>
+						<li class="hiden"><a href="#">iphone</a></li>
+						<li class="hiden"><a href="#">Watch</a></li>
+						<li class="hiden"><a href="#">Music</a></li>
+						<li class="hiden"><a href="#">技术支持</a></li>
+						<li><a id="search" href="#"><span class="iconfont">&#xe646;</span></a></li>
+						<li id="shop"><a href="#"><span class="iconfont">&#xe60e;</span></a></li>
+					</ul>
+					<!-- 购物袋 -->
+					<div id="show">
+						<p id="numbers" class="text-center">总价格：<span id="totalPrice">0.00</span><span>&yen;</span></p>
+						<p id="goods" class="text-blue"><span class="iconfont">&#xe9d8;</span> <a href="mycar.html">购物袋 </a>(<span id="totalNumber">34</span>)</p>
+						<p id="coll" class="text-blue"><span class="iconfont">&#xe612;</span> <a href="store.html">收藏 </a> </p>
+						<p id="username" class="text-blue"><span class="iconfont">&#xe676;</span> <a href="zhuce.html">账户</a></p>
+						<p id="login" class="text-blue" style="border: none;"><span class="iconfont">&#xe64b;</span> <a href="denglu.html">登陆</a></p>
+					</div>
+					<!-- 搜索框 -->
+					<div class="search" id="searchfont">
+						<span class="iconfont" style="color: white;font-size: 16px;">&#xe646;</span>
+						<input type="text" name="text" value="" placeholder="搜索 apple.com" autocomplete="off" />
+						<ul id="show-ul">
+							<a href="#">
+								<li>快速连接</li>
+							</a>
+							<a href="#">
+								<li>查找零售店</li>
+							</a>
+							<a href="#">
+								<li>today at Apple </li>
+							</a>
+							<a href="#">
+								<li>配件</li>
+							</a>
+							<a href="#">
+								<li>AirPods </li>
+							</a>
+							<a href="#">
+								<li>ipod </li>
+							</a>
+						</ul>
+					</div>
+					<script type="text/javascript">
+						//点击搜索展示输入框
+						var falg = 1;
+						$("#search").click(function(e) {
+							$("#searchfont").fadeTo(500, 1).css("display", "block");
+							e = e || event;
+							event.stopPropagation(); //阻止冒泡
+							falg++;
+							//每次点击时清除上次输入的文字
+							$("input").val("");
+							//每次点击时清除上次保存的  ??????
+
+							if (falg == 2) { //再次点击,隐藏文本框
+								$("#searchfont").css("display", "none");
+								falg = 0;
+							}
+						});
+						//点击购物车,实现显示
+						var falg = 0;
+						$("#shop").click(function(e) {
+							$("#show").fadeTo(500, 1).css("display", "block");
+							e = e || event;
+							event.stopPropagation();
+							falg++;
+							if (falg == 2) {
+								$("#show").css("display", "none");
+								falg = 0;
+							}
+						});
+
+						$("input").eq(0).click(function(e) {
+							e = e || event;
+							event.stopPropagation();
+
+						})
+						//点击桌面空白区，关闭搜索框，关闭购物
+						$(document).click(function(e) {
+							$("#show").css("display", "none");
+							$("#searchfont").css("display", "none");
+							$("#show-ul").show();
+							falg = 0;
+							//点击搜索,除搜索框以外的区域出现遮罩层
+							// $(function(e){
+							// 	$("#search").click(function(){
+							// 		$("#shadow").show();
+							// 	});
+							// 	e=e||event;event.stopPropagation();
+							// });
+							// $("#shadow").on('click',function(e){
+							// 	if($(e.target).closest('#searchfont').length >0){
+							// 		alert(1);
+							// 	}else{
+							// 		$("#shadow").hide();
+							// 	}
+							// })
+						})
+						//键盘在搜索框按下获取内容，
+						$("input").keyup(function() {
+							var inputVal = $("input").val()
+							console.log(inputVal);
+							var script = document.createElement("script");
+							//在文本框里输入文字进行查询的时候，隐藏推荐的搜索内容
+							//$("#show-ul").hide();
+							$("body").append(script);
+							script.src =
+								`https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=wise_web&wd=${inputVal}&req=2&bs=html&pbs=html&csor=3&pwd=js&cb=test&_=1557973280025`;
+						});
+
+						function test(data) {
+							console.log(data);
+							var result = data.g;
+							var str = ``;
+							for (var i = 0; i < result.length; i++) {
+								str +=
+									`<a href= 'https://www.baidu.com/s?wd=${result[i].q}'><li><span class="iconfont">&#xe646;</span>${result[i].q}</li></a>`;
+							}
+							$("#show-ul").html(str);
+						}
+						//加入购物车
+						var car = new Car();
+                    function addCar(btnEle) {
+                        var ul = btnEle.parentElement;
+                        var lis = ul.children;
+                    // console.log(lis);
+                    var shouji ={
+                        img:lis[0].innerHTML,
+                        marner:lis[1].innerHTML,
+                        id:lis[2].innerHTML,
+                        price:lis[3].innerHTML,
+                        number:1,
+                    
+                    };
+                    // console.log(shouji);
+                    car.addToCar(shouji)
+                    }
+                    document.getElementById('totalPrice').innerText = car.getTotalPrice();
+                	document.getElementById('totalNumber').innerText = car.getTotalNumber();
+					</script>
+				</div>
+			</div>
+		</div>
+		<!-- nav   end -->
+		<div class="btwen iphone-navs">
+			<img src="../images/iphoneXR.png">
+			<ul>
+				<li><a href="#">显示屏</a></li>
+				<li><a href="#">面容 ID</a></li>
+				<li><a href="#">A12 仿生</a></li>
+				<li><a href="#">相机</a></li>
+				<li><a href="#">独到之处</a></li>
+				<li><a href="#">技术规格</a></li>
+			</ul>
+		</div>
+		<!-- 产品导航 -->
+		<div class="btwen">
+			<div class="product">
+				<div class="product-photo" id="photo-fixed">
+					<img src="../images/iphonexs.png" width="70%" height="40%">
+					<ul class="goods-text">
+						<li><span class="iconfont">&#xe676;</span>
+							<p>免费送货</p>
+						</li>
+						<li><span class="iconfont">&#xe676;</span>
+							<p>免费送货</p>
+						</li>
+						<li><span class="iconfont">&#xe676;</span>
+							<p>免费送货</p>
+						</li>
+					</ul>
+				</div>
+				<!-- 右边的内容 -->
+				<div class="product-content">
+					<h2>购买iphone XS</h2>
+					<p>折抵换购，仅<b>RMB 176/</b>月起（0%费率24个月</br>分期）或<b>RMB429 </b>起*</p>
+					<h5>你是否有iphone 要折抵？</h5>
+					<button id="btn-yes" type="button">
+						<p>是</p>
+						<h6>①RMB176/月起或RMB 4229 *起</h6>
+					</button>
+					<button id="btn-no" type="button">
+						<p>否</p>
+						<h6>①RMB176/月起或RMB 4229 *起</h6>
+					</button>
+					<!--产品外观 颜色属性选择 -->
+					<div class="select-color">
+						<h5>选择外观</h5>
+						<ul>
+							<li>
+								<button type="button"><span style="border-color:#DCDCDC;"></span>
+									<h6>白色</h6>
+								</button>
+							</li>
+							<li>
+								<button type="button"><span style="border-color:#bbbbbb;"></span>
+									<h6>黑色</h6>
+								</button>
+							</li>
+							<li>
+								<button type="button"><span style="border-color:#c7e6f7;"></span>
+									<h6>蓝色</h6>
+								</button>
+							</li>
+							<li>
+								<button type="button"><span style="border-color:#fdf0c7;"></span>
+									<h6>黄色</h6>
+								</button>
+							</li>
+							<li>
+								<button type="button"><span style="border-color:#ffd3cd;"></span>
+									<h6>珊瑚色</h6>
+								</button>
+							</li>
+							<li>
+								<button type="button"><span style="border-color:#e0b2b7;"></span>
+									<h6>红色</h6>
+								</button>
+							</li>
+						</ul>
+					</div>
+					<!-- 产品选择  内存容量选择 -->
+					<div class="select-color">
+						<h5>选择内存容量</h5>
+						<ul>
+							<li>
+								<button type="button">
+									<h3>64GB</h3>
+									<h4>①RMB176/月或<br>RMB 4229*</h4>
+								</button>
+							</li>
+							<li>
+								<button type="button">
+									<h3>128GB</h3>
+									<h4>①RMB176/月或<br>RMB 4729*</h4>
+								</button>
+							</li>
+							<li>
+								<button type="button">
+									<h3>256GB</h3>
+									<h4>①RMB176/月或<br>RMB 5229*</h4>
+								</button>
+							</li>
+						</ul>
+					</div>
+					<!-- 继续购买及收藏按钮 -->
+					<div class="botton-content">
+						<li class="no-show"><img src="../images/iphonexs.png"></li>
+						<li class="no-show">新款</li>
+						<li class="no-show">iphoneXS</li>
+						<li class="no-show">5229</li>
+						<input type="button" id="btn" onclick="addCar(this)" value="添加到购物袋" /><a href="#"><span class="iconfont">&#xe612;</span></a>
+					</div>
+					<!-- 最后一段文字 -->
+					<p class="text-copy">获得购买帮助，立即在线交流或致电400-666-8800</p>
+				</div>
+			</div>
+		</div>
+		<!-- 产品内容结束 -->
+		<div class="best">
+			<div class="banner" id="banner">
+				<ul class="img-list" id="img-list">
+					<li index="0"><img src="../images/iphone-xr-gallery1-201809.jpg" width="1200px" height="640px"></li>
+					<li index="1"><img src="../images/iphone-xr-gallery2-201809.jpg" width="1200px" height="640px"></li>
+					<li index="2"><img src="../images/iphone-xr-gallery3-201809.jpg" width="1200px" height="640px"></li>
+					<li index="3"><img src="../images/iphone-xr-gallery4-201809.jpg" width="1200px" height="640px"></li>
+					<li index="4"><img src="../images/iphone-xr-gallery5-201809.jpg" width="1200px" height="640px"></li>
+					<li index="0"><img src="../images/iphone-xr-gallery1-201809.jpg" width="1200px" height="640px"></li>
+				</ul>
+
+				<ul class="banner-nav-list" id="banner-nav-list">
+					<li class="active"></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+				<div id="arr">
+					<div class="toLeft" id="toLeft"></div>
+					<div class="toRight" id="toRight"></div>
+				</div>
+			</div>
+		</div>
+		<!-- 轮播图结束 -->
+		<div class="betwen">
+			<div class="container">
+				<p class="text-font3">* 所示的 iPhone XR 64GB 机型价格是使用 iPhone 7 Plus 32GB 机型进行折抵换购的价格。上述所示机型的分期付款金额是在使用 iPhone 7 Plus 32GB 机型进行折抵后，再以招商银行、中国工商银行或花呗 24 期免息分期付款方式估算得出的整数金额 (未显示小数点以后的金额)，实际支付金额以银行或花呗账单为准。本优惠活动暂定截止日期为 2019 年 6 月 30 日，可能视情况延长。折抵金额仅可在限定时间内使用，并且要求用于购买新 iPhone，以限制条款为准。实际折抵金额取决于设备的状况、配置、制造年份，以及发售国家或地区。银行或花呗可能要求你的可用信用额度大于所购买产品的总金额，才能使用分期付款服务。有关信用卡或花呗分期服务的申请及使用问题，请与银行或花呗联系，Apple 对此不做任何承诺和保证。Apple 的折抵换购活动为 Apple 与 Apple 折抵服务合作伙伴共同推出，年满 18 周岁及以上者才能享受此项折抵换购服务。店内折抵换购需出示政府颁发并附有照片的有效身份证件 (当地法律可能会要求存储该信息)。可能需要遵守 Apple 或 Apple 折抵服务合作伙伴的其他条款。本优惠不能与 Apple 的其他优惠或折扣活动同时使用。如需了解更多免息分期付款信息，请点击此处。</p>
+				<p class="text-font3">** 仅限新订阅用户。当试用期结束后，会员方案将按月自动续订。</p>
+			</div>
+		</div>
+		<!-- footer  -->
+		<div class="betwen">
+			<div class="container foot">
+				<!-- 1/5 -->
+				<ul>
+					<li style="font-weight: 600;">选购及了解</li>
+					<li>Mac</li>
+					<li>ipad</li>
+					<li>iphone</li>
+					<li>Watch</li>
+					<li>Music</li>
+					<li>itunes</li>
+					<li>HomePod</li>
+					<li>ipod touch</li>
+					<li>配件</li>
+					<li>App Store充值卡</li>
+				</ul>
+				<!-- 2/5 -->
+				<ul>
+					<li style="font-weight: 600;">Apple Store 商店</li>
+					<li>查找零售店</li>
+					<li>Genius Bar 天才吧</li>
+					<li>Today at Apple</li>
+					<li>Apple 夏令营</li>
+					<li>Field Trip 课外活动</li>
+					<li>翻新和优惠</li>
+					<li>分期付款</li>
+					<li>Apple Trade In 换购计划</li>
+					<li>订单状态</li>
+				</ul>
+				<!-- 3/5 -->
+				<ul>
+					<li style="font-weight: 600;">Apple 教育</li>
+					<li>Apple 与教育</li>
+					<li>高校师生选购</li>
+					<li>商务应用</li>
+					<li>Apple 与商务</li>
+					<li>商务选购</li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+				<!-- 4/5 -->
+				<ul>
+					<li style="font-weight: 600;">账户</li>
+					<li>管理你的 Apple ID</li>
+					<li>Apple Store 账户</li>
+					<li>iCloud.com</li>
+					<li></li>
+					<li>Apple 价值观</li>
+					<li>辅助功能</li>
+					<li>环境责任</li>
+					<li>隐私</li>
+					<li>供应商责任</li>
+				</ul>
+				<!-- 5/5 -->
+				<ul>
+					<li style="font-weight: 600;">关于 Apple</li>
+					<li>Newsroom</li>
+					<li>Apple 管理层</li>
+					<li>工作机会</li>
+					<li>工作机会</li>
+					<li>创造就业</li>
+					<li>活动</li>
+					<li>联系 Apple</li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+		</div>
+		<!-- copy -->
+		<div class="betwen">
+			<div class="container copy">
+				<p class="text-border">更多选购方式：<a href="#">前往 Apple Store 零售店，</a>，致电 400-666-8800 或查找在你附近的授权经销商。</p>
+				<p>Copyright © 2019 Apple Inc. 保留所有权利。隐私政策 使用条款 销售政策 法律信息 网站地图</p>
+				<p>京公安网安备11010502008968 京ICP备10214630 营业执照 无线电发射设备销售备案编号11201910351200</p>
+			</div>
+		</div>
+		
+
+	</body>
+</html>
+<script type="text/javascript">
+	//滚轮到达图片时,固定在顶部
+	var navigation = document.getElementsByClassName("iphone-navs");
+	var photo = document.getElementById("photo-fixed");
+
+	window.onscroll = function() {
+		var stop = document.documentElement.scrollTop || document.body.scrollTop;
+		//白色导航栏固定
+		// if(stop >85){
+		// 	navigation[0].style.position = "fixed";
+		// 	navigation[0].style.top= 0 ;
+		// }else{
+		// 	navigation[0].style.position="static";
+		// }
+		// //图片固定
+		// if(stop >150 && stop <800){
+		// 	photo.style.position = "fixed";
+		// 	photo.style.top=85;
+		// }else{
+		// 	photo.style.position="static";
+		// }
+	}
+	// 轮播图
+	//ul走-810
+	//ul走-810
+	var imgList = $id("img-list");
+	var nav = $id("banner-nav-list");
+	var arr = $id("arr");
+	var banner = $id("banner");
+	var toLeft = $id("toLeft");
+	var toRight = $id("toRight");
+	var navLi = nav.children;
+	var index = 0;
+	var timer = setInterval(autoPlay, 1000);
+
+
+	function autoPlay() {
+		if (index == 5) {
+			index = 1;
+			imgList.style.left = 0;
+		} else {
+			index++;
+		}
+		for (var i = 0; i < navLi.length; i++) {
+			navLi[i].className = "";
+		}
+		animate(imgList, {
+			left: -1200 * index
+		}, 20);
+		navLi[index == 5 ? 0 : index].className = "active";
+	}
+	//鼠标移入banner arr显示opacity = 1;
+	//停止轮播
+	banner.onmouseover = function() {
+		animate(arr, {
+			opacity: 100
+		}, 20);
+		clearInterval(timer);
+	}
+	//鼠标移出banner arr显示opacity = 0;
+	//轮播重新开始
+	banner.onmouseout = function() {
+		animate(arr, {
+			opacity: 0
+		}, 20);
+		//clearInterval(timer);
+		timer = setInterval(autoPlay, 1000);
+	}
+	toLeft.onclick = function() {
+		if (index == 5) { //因为自动轮播时，有一张伪造的图片，当显示 第一张时，其实是最后一张，所以这时的下标为4
+			index = 0;
+			imgList.style.left = 0;
+		} else if (index == 0) {
+			index = 0;
+		} else {
+			index--;
+		}
+		//手动轮播：ul向左走
+		for (var i = 0; i < navLi.length; i++) {
+			navLi[i].className = "";
+		}
+		animate(imgList, {
+			left: -1200 * index
+		}, 20);
+		navLi[index].className = "active";
+	}
+	toRight.onclick = function() {
+		//alert(index);
+		if (index == 5) {
+			index = 1;
+			imgList.style.left = 0;
+		} else if (index == 4) {
+			index = 4;
+		} else {
+			index++;
+		}
+		//手动轮播：ul向左走
+		for (var i = 0; i < navLi.length; i++) {
+			navLi[i].className = "";
+		}
+		animate(imgList, {
+			left: -1200 * index
+		}, 20);
+		navLi[index].className = "active";
+	}
+
+	for (var i = 0; i < navLi.length; i++) {
+		navLi[i].index = i;
+		navLi[i].onmouseover = function() {
+			//获取当前li下标
+			index = this.index;
+			//alert(this.index);
+			for (var j = 0; j < navLi.length; j++) {
+				navLi[j].className = "";
+			}
+			animate(imgList, {
+				left: -1200 * index
+			}, 20);
+			navLi[index].className = "active";
+		}
+	}
+	
+	//加入购物车
+	 var car = new Car();
+	function addCar(btnEle) {
+	    var ul = btnEle.parentElement;
+	    var lis = ul.children;
+	   // console.log(lis);
+	   var shouji ={
+	    img:lis[0].innerHTML,
+	    marner:lis[1].innerHTML,
+	    id:lis[2].innerHTML,
+	    price:lis[3].innerHTML,
+	    number:1,
+	   
+	   };
+	  // console.log(shouji);
+	   car.addToCar(shouji)
+	}
+</script>

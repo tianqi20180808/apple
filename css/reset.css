@@ -1,0 +1,13 @@
+html, body, ul, li, ol, dl, dd, dt, p, h1, h2, h3, h4, h5, h6, p,span,a,input,form,table,tr,td,dl,dt,dd,i,em,
+strong,b,div,img,fieldset{ margin:0; padding:0; }
+a{text-decoration:none;color:#333;}
+ul li,ol li{list-style:none;}
+img{border:none;}
+h1,h3,b,h2{font-weight:normal;}
+body{color:#333;font:12px "微软雅黑";background:#fff;}
+.clearfix:after{content:"";overflow:hidden;clear:both;visibility:hidden;height:0;font-size:0;display:block;}
+.fl{float:left;}
+.fr{float:right;}
+i{
+    font-style:normal;
+}
